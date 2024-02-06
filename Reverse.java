@@ -6,9 +6,9 @@ public class Reverse {
 	public static void main (String[] args){
 		//// Put your code here
 		String ABC = args[0];
-		int length = ABC.length();
+		int length = ABC.length()-1;
 		String reverse = "";
-		for(int i =length-1; i>=0; i--){
+		for(int i =length; i>=0; i--){
 			char CBA = ABC.charAt(i);
 			reverse+= CBA;
 		}
