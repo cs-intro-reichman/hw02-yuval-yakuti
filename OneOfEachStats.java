@@ -14,57 +14,54 @@ public class OneOfEachStats {
 		int seed = Integer.parseInt(args[1]);
 		// Initailizes a random numbers generator with the given seed value
         Random generator = new Random(seed);  
-		int sum2 = 0;
-		int sum3 = 0;
-		int sum4 = 0;
-		int allsum = 0;
-		for(int i = 0; i<T; i++){
-		boolean child = true;
-		int sum = 0;
-		double x = generator.nextDouble();
-		if (x<0.5) 
-		{
-			sum++;
-		} else {
-			sum++;
-			child = false;
-		       } 
-		boolean kid = child;
-		while (kid==child) {
-			x = Math.random();
-			if (x<0.5) 
-		{
-				sum++;
-				kid = true;
-		} else {
-			sum++;
-			kid = false;
-		       } 
+		boolean girl= false;
+		boolean boy= false;
+		int childrenSum=0;
+		int childrenPerFam=0;
+		int two=0;
+		int three=0;
+		int four=0;
+		for(int t=0; t < T; t++){
+				while (girl==false || boy==false){
+					double rnd=generator.nextDouble();
+					if (rnd<0.5){
+						girl=true;	
+					}
+					else{
+						boy=true;
+					}
+					childrenPerFam++;
+					childrenSum++;
+				}
+			if(childrenPerFam==2){
+				two++;
+			} 
+				else if(childrenPerFam==3){
+					three++;
+				}
+					else if(childrenPerFam>=4){
+						four++;
+					}
+		childrenPerFam=0;
+		girl= false;
+		boy= false;
 		}
-		if ( sum == 2) {
-			sum2++;
-		} else if (sum == 3) {
-			sum3++;
-		} else {
-			sum4++;
-		}	
-		allsum=allsum+sum;
-		}
-		double avg=(double)allsum/T;
-		System.out.println("Average: " + avg + " children to get at least one of each gender.");
-		System.out.println("Number of families with 2 children: " + sum2);
-		System.out.println("Number of families with 3 children: " + sum3);
-		System.out.println("Number of families with 4 or more children: " + sum4);
-
-		if (sum2>sum3&&sum2>sum4) {
+		double avg=((double)childrenSum/T);
+		System.out.println("Average: "+avg+" children to get at least one of each gender.");
+		System.out.println("Number of families with 2 children: "+two);
+		System.out.println("Number of families with 3 children: "+three);
+		System.out.println("Number of families with 4 or more children: "+four);
+		
+		if((two>three)&&(two>four)){
 			System.out.println("The most common number of children is 2.");
 		}
-		else if (sum3>sum4&&sum3>sum2) {
+		else if((three>four)&&(three>two)){
 			System.out.println("The most common number of children is 3.");
 		}
-		else {
-			System.out.println("The most common number of children is 4.");
+		else if((four>three)&&(four>two)){
+			System.out.println("The most common number of children is 4 or more.");
 		}
+
 		//// In the previous version of this program, you used a statement like:
 		//// double rnd = Math.random();
 		//// Where "rnd" is the variable that stores the generated random value.
